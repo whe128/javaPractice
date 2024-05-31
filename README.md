@@ -1,5 +1,5 @@
 # practice for java and git
-## 1.create the local respository and add to git
+## 1.Create the local project and add to git
 1. Create the project in IDE (local project)
 2. Open the terminal in the root path of the project
 3. Input **`git init`**-- to create the local respository
