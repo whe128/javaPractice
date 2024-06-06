@@ -7,23 +7,16 @@ public class ArrayListSet<T> implements Set<T> {
 
     @Override
     public boolean add(T value) {
-        if(contains(value)){
+        if(list.contains(value)){
             return false;
         }
-        else {
-            list.add(value);
-            return true;
-        }
+        list.add(value);
+        return true;
     }
 
     @Override
     public boolean contains(T value) {
-        if(list.contains(value)){
-            return true;
-        }
-        else {
-            return false;
-        }
+        return list.contains(value);
     }
 
     @Override
@@ -33,19 +26,14 @@ public class ArrayListSet<T> implements Set<T> {
 
     @Override
     public boolean remove(T value) {
-        if(list.contains(value)){
-            list.remove(value);
-            return true;
-        }
-        else {
-            return false;
-        }
+        return list.remove(value);
     }
 
     @Override
     public String toString() {
         return list.toString();
     }
+
 
     public static void main(String[] args) {
         ArrayListSet<String> set= new ArrayListSet<>();

@@ -1,5 +1,9 @@
 package J14;
 
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+
 public class Collections {
     public static void main(String[] args) {
         Student fred = new Student("Fred", 21, "u1234567", "BCOMP");
@@ -23,5 +27,24 @@ public class Collections {
         for(Student s : students) {
             System.out.println(s);
         }
+
+        Map<String, Student> studentDirectory = new HashMap<>();
+        Iterator<Student> iterator = students.iterator();
+
+        //iterator
+        while (iterator.hasNext()){
+            Student student = iterator.next();
+            studentDirectory.put(student.uid,student);
+        }
+
+        Iterator<String> stringIterator = studentDirectory.keySet().iterator();
+        while(stringIterator.hasNext()){
+            String uid = stringIterator.next();
+            System.out.println(uid+ " " + studentDirectory.get(uid));
+        }
+
+        //foreach
+        studentDirectory.keySet().forEach(key-> System.out.println("foreach "+ key + " " + studentDirectory.get(key) ));
+        System.out.println(studentDirectory.containsKey("u123"));
     }
 }

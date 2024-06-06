@@ -19,7 +19,7 @@ public class JUnitTests {
         int result;
         result = add(3,5);
 
-        assert (result==8):"not it is";
+        assert (result==8):"not it is "+result+" not 8";
     }
     @Test
     void test3(){

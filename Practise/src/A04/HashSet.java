@@ -96,6 +96,17 @@ public class HashSet<T> implements Set<T> {
         return getPossibleBucket(entry).contains(entry);
     }
 
+    public T get(T entry){
+        //find the list
+        ArrayList<T> bucket = getPossibleBucket(entry);
+        int index = bucket.indexOf(entry);
+
+        if(index<0){
+            return null;
+        }
+        return bucket.get(index);
+    }
+
     @Override
     public int size() {
         return itemCount;
@@ -106,10 +117,24 @@ public class HashSet<T> implements Set<T> {
         ArrayList<T> list = getPossibleBucket(entry);
         if(list.contains(entry)){
             list.remove(entry);
+            itemCount--;
             return true;
         }
         else {
             return false;
+        }
+    }
+
+    public T removeAndReturn(T entry){
+        ArrayList<T> list = getPossibleBucket(entry);
+        if(list.contains(entry)){
+            T oldEntry = list.get(list.indexOf(entry));
+            list.remove(entry);
+            itemCount--;
+            return oldEntry;
+        }
+        else{
+            return null;
         }
     }
 
@@ -119,8 +144,13 @@ public class HashSet<T> implements Set<T> {
         int i = 0;
         for(ArrayList<T> list:buckets){
             builder.append(i+": [");
-            for(T item: list){
-                builder.append(item+ ", ");
+            for(int j=0;j<list.size();j++){
+                if(j< list.size()-1){
+                    builder.append(list.get(j)+ ", ");
+                }
+                else {
+                    builder.append(list.get(j));
+                }
             }
             builder.append("]\n");
             i++;
@@ -137,12 +167,12 @@ public class HashSet<T> implements Set<T> {
         set.add("orange");
         set.add("banana");
         set.add("pear");
-        System.out.println(set);
         set.add("apricot");
         set.add("peach");
         set.add("mango");
         set.add("plum");
-        set.add("apple");
+        System.out.println(set);
+
         System.out.println(
                 "We have 8 items and 4 buckets so far. The next added item will trigger\n" +
                         "a resize because we will exceed the loading factor of 2, that is, we would\n" +
